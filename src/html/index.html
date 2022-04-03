@@ -4,10 +4,19 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>KS-OS-AppEditor</title>
+        <link rel="stylesheet" href="../client-utils/css-images/client-css/index.css" type="text/css" />
     </head>
 
     <body>
-        <h1>Just Checking if everything works</h1>
+        <div class="container">
+            <div id="LogUserNameDiv">
+                <div>
+                    <input type="text" id="LogUserName" placeholder="user name" />
+                    <input type="password" id="LogPassword" placeholder="password" />
+                </div>
+                <button id="signIn">Sign In</button>
+            </div>
+        </div>
         <script src="../client-utils/render.js"></script>
         <script src="../client-utils/update_my_app.js"></script>
         <script src="../client-utils/config.js"></script>
