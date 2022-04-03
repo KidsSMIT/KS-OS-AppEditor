@@ -1,0 +1,151 @@
+{
+    "name": "ksosappeditor",
+    "version": "0.0.0",
+    "description": "KS-OS Electron JS App Editor for creating new OS Apps",
+    "main": "src/main.js",
+    "scripts": {
+        "start": "electron .",
+        "package": "npx electron-forge package",
+        "make": "electron-forge make",
+        "publish": "npx electron-forge publish",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/KidsSMIT/KS-OS-AppEditor.git"
+    },
+    "keywords": [
+        "Electron",
+        "ElectronJS",
+        "Electron-Builder",
+        "Electron-Forge",
+        "Electron-Packager",
+        "quick-start",
+        "electron-quick-start",
+        "Kids SMIT",
+        "Kids SMIT OS",
+        "Kids SMIT OS Apps",
+        "Kids SMIT OS Apps Editor"
+    ],
+    "author": "Kids SMIT",
+    "license": "CC-BY-NC-4.0",
+    "bugs": {
+        "url": "https://github.com/KidsSMIT/KS-OS-AppEditor/issues"
+    },
+    "homepage": "https://github.com/KidsSMIT/KS-OS-AppEditor#readme",
+    "config": {
+        "appId": "com.KidsSMIT.KS-OS-AppEditor",
+        "productName": "KS-OS App Editor",
+        "forge": {
+            "packagerConfig": {},
+            "makers": [
+                {
+                    "name": "@electron-forge/maker-squirrel",
+                    "config": {
+                        "name": "KS-OS-AppEditor"
+                    }
+                },  
+
+                {
+                    "name": "@electron-forge/maker-zip",
+                    "platforms": [
+                        "darwin"
+                    ]
+                },
+
+                {
+                    "name": "@electron-forge/maker-deb",
+                    "config": {
+                        "name": "KS-OS-AppEditor"
+                    }
+                },
+
+                {
+                    "name": "@electron-forge/maker-rpm",
+                    "config": {
+                        "name": "KS-OS-AppEditor"
+                    }
+                },
+
+                {
+                    "name": "@electron-forge/maker-dmg",
+                    "config": {
+                        "name": "KS-OS-AppEditor"
+                    }
+                },
+
+                {
+                    "name": "@electron-forge/maker-exe",
+                    "config": {
+                        "name": "KS-OS-AppEditor"
+                    }
+                },
+
+                {
+                    "name": "@electron-forge/maker-portable-zip",
+                    "config": {
+                        "name": "KS-OS-AppEditor"
+                    }
+                }
+            ],
+
+            "publishers": [
+                {
+                    "name": "@electron-forge/publisher-github",
+                    "config": {
+                        "repository": {
+                            "owner": "Kids SMIT",
+                            "name": "KS-OS-AppEditor",
+                            "type": "git",
+                            "url": "https://github.com/KidsSMIT/KS-OS-AppEditor.git"
+                        },
+                        "draft": true,
+                        "prerelease": false
+                    }
+                }
+            ]
+        }
+    },
+
+    "devDependencies": {
+        "@electron-forge/cli": "^6.0.0-beta.57",
+        "@electron-forge/maker-deb": "^6.0.0-beta.57",
+        "@electron-forge/maker-rpm": "^6.0.0-beta.57",
+        "@electron-forge/maker-squirrel": "^6.0.0-beta.57",
+        "@electron-forge/maker-zip": "^6.0.0-beta.61",
+        "@electron-forge/publisher-github": "^6.0.0-beta.61",
+        "electron": "^16.0.5",
+        "electron-builder": "22.10.5"
+    },
+
+    "dependencies": {
+        "electron-builder-squirrel-windows": "^22.14.12",
+        "electron-squirrel-startup": "^1.0.0",
+        "electron-updater": "^4.3.9",
+        "sqlite3": "^5.0.2"
+    },
+
+    "build": {
+        "extraResources": [
+            "databaseFolder"
+        ],
+        "productName": "KS-OS-AppEditor",
+        "copyright": "Copyright © 2022 ${author}",
+        "linux": {
+            "category": "Development",
+            "publish": false,
+            "target": "AppImage"
+        },
+        
+        "mac": {
+            "icon": "src/icon.png",
+            "category": "public.app-category.developer-tools"
+        },
+
+        "win": {
+            "icon": "src/icon.png"
+        }
+    }
+}
