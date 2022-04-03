@@ -3,7 +3,7 @@ var Config = {
      * Server url for debugging and working on feature, 
      * Change this when ever you start working on a new feature
      */
-    debug_url: "https://KS-BOT-Server.learncode2.repl.co",
+    debug_url: "http://10.0.0.169:8080/",
 
     /**
      * This is server url for production, do not change this,
@@ -15,7 +15,7 @@ var Config = {
      * Sets if to user the debug_url or production url, change to the right url
      * before you commit
      */
-    debug: false,
+    debug: true,
 
     /**
      * Returns the correct URL based on if you are in debug or not

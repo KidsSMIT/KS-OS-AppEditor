@@ -47,8 +47,8 @@ let run = () => {
 }
 
 ipcMain.on("login", (event, arg) => {
-    cap.user.create_user(arg.id, arg.name, arg.password)
-    cap.openWindow("Home");
+    cap.user.create_user(arg.id, arg.name, arg.password, arg.email, arg.homeFolderName, arg.homeFolderID)
+    //cap.openWindow("Home");
 })
 
 ipcMain.on("LogInCredentials", (event, arg) => {

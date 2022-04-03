@@ -174,8 +174,6 @@ class Menu {
                             doc.appendChild(toDom(`<div id="title_bar_article_${i}">${i} +</div>`))
                         }
                     }
-                    console.log(i);
-                    console.log(obj)
                     let current_doc = document.getElementById(`title_bar_article_${i}`);
                     current_doc.onclick = obj.click;
 

@@ -23,7 +23,7 @@ class KS {
         this.update_window = null;
         this.frame = frame;
         this.data = null;
-        this.user = new Users(null, null, null);
+        this.user = new Users(null, null);
         this.dirname = dirname || __dirname;
 
         dirname = this.dirname;

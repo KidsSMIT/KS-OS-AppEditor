@@ -54,3 +54,19 @@ input {
     border: 1px solid black;
     border-radius: 10px;
 }
+
+.error {
+    z-index: 100;
+    justify-content: center;
+    position: relative;
+    height: 50vh;
+    position: relative;
+    top: -40vh;
+    width: 100%;
+    height: min-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 1px solid black;
+    color: red;
+}
