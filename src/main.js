@@ -1,6 +1,7 @@
 // Modules to control application life and create native browser window
 const { app, ipcMain, Tray, BrowserWindow } = require('electron');
 
+
 if (require('electron-squirrel-startup'))  app.quit();
 
 const { autoUpdater } = require("electron-updater");
@@ -8,10 +9,10 @@ const { autoUpdater } = require("electron-updater");
 
 const path = require('path');
 
-require(path.resolve(__dirname, "debug_console"))
+require(path.resolve(__dirname, "node-utils/debug_console"))
 
 // Used to Debug Releases that won't have a console... Comment out when devloping
-
+/*
 
 const fs = require("fs");
 try {
@@ -23,9 +24,9 @@ try {
 
 //Uncomment this if you are not running in dev mode
 console.file(path.resolve(process.resourcesPath, "console.log"));
-
-const { KS, image } = require(path.join(__dirname, 'KS'));
-const db_func = require(path.join(__dirname, 'db'));
+*/
+var { KS, image } = require(path.join(__dirname, 'node-utils/KS'));
+const db_func = require(path.join(__dirname, 'node-utils/db'));
 
 db_func.does_db_exit_if_not_create()
 
@@ -34,10 +35,10 @@ let cap = new KS(null, 'KS', null, 1300,
         nodeIntegration: true,
         contextIsolation: false,
         enableRemoteModule: true,
-    }, false)
+    }, false, __dirname)
 
 
-console.log(cap.add_child("KS", "html/index.html", false, (win) => { console.log("DONE") }, true));
+console.log(cap.add_child("KS", "html/index.html", true, (win) => { console.log("DONE") }, true));
 //console.log(cap.add_child("Home", "home.html", false, function() { console.log("Added Home to ks") }));
 
 let run = () => {
@@ -80,6 +81,9 @@ app.on('activate', () => {
 let tray = null
 
 app.whenReady().then(() => {
+    if (image == null) {
+        image = cap.createNativeImage(path.join(__dirname, "icon.png"));
+    }
     tray = new Tray(image.resize({ width: 600, height: 600 }))
     tray.setTitle('KS-Bot');
     run();

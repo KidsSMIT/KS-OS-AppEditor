@@ -376,8 +376,6 @@ class TitleBar {
      * Button effect for when the app icon is clicked
      */
     go_to_home = () => {
-        console.log("Go to home was clicked")
-            //render.send("go_to_home") // We don't need this for real
         shell.openExternal(Config.get_url())
     }
 
@@ -385,37 +383,9 @@ class TitleBar {
      * Button effect for when the page title is clicked
      */
     go_to_captalist = () => {
-        console.log("Go to captalist was clicked")
-        console.log("Base Url is ", Config.get_url())
         shell.openExternal(Config.get_url())
     }
 }
-
-var menu = new Menu({
-    "Menu": new MenuOptions(
-        function() { console.log("I was clicked") },
-        new Menu({
-            "BIG": new MenuOptions(
-                function() { console.log("BIG") },
-                new Menu({
-                    'optionsBIG': new MenuOptions()
-                })
-            ),
-            "WayBigger": new MenuOptions(
-                function() { console.log("WayBigger") },
-                new Menu({
-                    'optionsWB': new MenuOptions()
-                })
-            ),
-            "moreT": new MenuOptions(
-                function() {},
-                new Menu({
-                    'optionsMORET': new MenuOptions()
-                })
-            )
-        })
-    )
-})
 
 var head = document.getElementsByTagName('HEAD')[0];
 var link = document.createElement('link');
@@ -424,7 +394,7 @@ link.rel = 'stylesheet';
 
 link.type = 'text/css';
 
-link.href = 'render.css';
+link.href = '../client-utils/css-images/render.css';
 head.appendChild(link);
 
-let title_bar = new TitleBar("#333", "icon.png", text_color = "white", shadow = true)
+let title_bar = new TitleBar("#333", "../icon.png", text_color = "white", shadow = true)

@@ -6,13 +6,11 @@ const db_func = require(path.join(__dirname, "db"))
 
 const { Users } = require(path.join(__dirname, "user"))
 
-const image = nativeImage.createFromPath(
-    path.join(__dirname, "icon.png")
-)
+var image = null;
 
 class KS {
 
-    constructor(parent, parent_name, parent_func, width, height, webpref, frame) {
+    constructor(parent, parent_name, parent_func, width, height, webpref, frame, dirname) {
         this.parent = parent;
         this.parent_name = parent_name;
         this.width = width;
@@ -26,6 +24,14 @@ class KS {
         this.frame = frame;
         this.data = null;
         this.user = new Users(null, null, null);
+        this.dirname = dirname || __dirname;
+
+        dirname = this.dirname;
+        if (image == null) {
+            image = nativeImage.createFromPath(
+                path.join(dirname, "icon.png")
+            )
+        }
     }
 
     /**
@@ -55,7 +61,7 @@ class KS {
                 });
 
                 new_child.on("close", this.close_all);
-                new_child.loadFile(path.join(__dirname, file_name))
+                new_child.loadFile(path.join(this.dirname, file_name))
                 if (open_dev == true) {
                     let devtools = new BrowserWindow();
                     new_child.webContents.setDevToolsWebContents(devtools.webContents)
@@ -88,12 +94,12 @@ class KS {
                     fullscreen: true,
                     webPreferences: this.webpref,
                     icon: image.resize({ width: 600, height: 600 }),
-                    alwaysOnTop: true,
+                    alwaysOnTop: false,
                     frame: this.frame
                 });
 
                 this.parent.on("close", app.quit);
-                this.parent.loadFile(path.join(__dirname, file_name));
+                this.parent.loadFile(path.join(this.dirname, file_name));
                 if (open_dev == true) {
                     let devtools = new BrowserWindow()
                     this.parent.webContents.setDevToolsWebContents(devtools.webContents)
@@ -165,6 +171,15 @@ class KS {
         })
 
         return `Running ${this.parent_name} APP`
+    }
+
+    /**
+     * Creates a new native image with the given path
+     * @param {string} image_path - Path to image 
+     * @returns {import("electron").NativeImage} - Returns a native image
+     */
+    createNativeImage(image_path) {
+        return nativeImage.createFromPath(image_path)
     }
 }
 
