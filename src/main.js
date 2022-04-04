@@ -43,7 +43,7 @@ console.log(cap.add_child("KS", "html/index.html", true, (win) => { console.log(
 
 let run = () => {
     cap.run(() => {})
-    autoUpdater.checkForUpdates();
+    //autoUpdater.checkForUpdates();
 }
 
 ipcMain.on("login", (event, arg) => {
