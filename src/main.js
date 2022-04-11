@@ -35,11 +35,12 @@ let cap = new KS(null, 'KS', null, 1300,
         nodeIntegration: true,
         contextIsolation: false,
         enableRemoteModule: true,
-    }, false, __dirname)
+    }, false, __dirname, "http://10.0.0.169:8080/", "https://ksbot.kidssmit.com", true)
 
 
-console.log(cap.add_child("KS", "html/index.html", true, (win) => { console.log("DONE") }, true));
-//console.log(cap.add_child("Home", "home.html", false, function() { console.log("Added Home to ks") }));
+console.log(cap.add_child("KS", "html/index.html", false, (win) => { console.log("DONE") }, true));
+console.log(cap.add_child("ErrorPage", "html/error.html", false, (win) => { console.log("DONE")}, false));
+console.log(cap.add_child("Home", "html/home.html", true, function() { console.log("Added Home to ks") }));
 
 let run = () => {
     cap.run(() => {})
@@ -48,7 +49,7 @@ let run = () => {
 
 ipcMain.on("login", (event, arg) => {
     cap.user.create_user(arg.id, arg.name, arg.password, arg.email, arg.homeFolderName, arg.homeFolderID)
-    //cap.openWindow("Home");
+    cap.openWindow("Home");
 })
 
 ipcMain.on("LogInCredentials", (event, arg) => {

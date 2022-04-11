@@ -18,7 +18,6 @@ document.getElementById("signIn").addEventListener("click", function () {
             })
         }).then(res => res.json()).then(data => {
             if (data.status !== "error") {
-                console.log(data)
                 ipcRenderer.send("login", {id: data.id, email: data.email, homeFolderName: data.homeFolderName, homeFolderID: data.homeFolderID, name: name, password: password});
             } else {
                 throw new LoginInError("User does not exist please try again.")

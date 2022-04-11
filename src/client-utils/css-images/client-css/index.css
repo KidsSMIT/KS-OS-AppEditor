@@ -58,9 +58,7 @@ input {
 .error {
     z-index: 100;
     justify-content: center;
-    position: relative;
     height: 50vh;
-    position: relative;
     top: -40vh;
     width: 100%;
     height: min-content;

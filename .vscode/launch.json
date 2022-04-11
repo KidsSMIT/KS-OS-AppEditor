@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Electron Main",
-            "program": "${workspaceFolder}/main.js",
+            "program": "${workspaceFolder}/src/main.js",
             "request": "launch",
             "runtimeExecutable": "${workspaceFolder}\\node_modules\\.bin\\electron",
             "skipFiles": [

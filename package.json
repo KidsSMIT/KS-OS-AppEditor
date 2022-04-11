@@ -46,43 +46,37 @@
                     "config": {
                         "name": "KS-OS-AppEditor"
                     }
-                },  
-
+                },
                 {
                     "name": "@electron-forge/maker-zip",
                     "platforms": [
                         "darwin"
                     ]
                 },
-
                 {
                     "name": "@electron-forge/maker-deb",
                     "config": {
                         "name": "KS-OS-AppEditor"
                     }
                 },
-
                 {
                     "name": "@electron-forge/maker-rpm",
                     "config": {
                         "name": "KS-OS-AppEditor"
                     }
                 },
-
                 {
                     "name": "@electron-forge/maker-dmg",
                     "config": {
                         "name": "KS-OS-AppEditor"
                     }
                 },
-
                 {
                     "name": "@electron-forge/maker-exe",
                     "config": {
                         "name": "KS-OS-AppEditor"
                     }
                 },
-
                 {
                     "name": "@electron-forge/maker-portable-zip",
                     "config": {
@@ -90,7 +84,6 @@
                     }
                 }
             ],
-
             "publishers": [
                 {
                     "name": "@electron-forge/publisher-github",
@@ -108,7 +101,6 @@
             ]
         }
     },
-
     "devDependencies": {
         "@electron-forge/cli": "^6.0.0-beta.57",
         "@electron-forge/maker-deb": "^6.0.0-beta.57",
@@ -119,14 +111,13 @@
         "electron": "^16.0.5",
         "electron-builder": "22.10.5"
     },
-
     "dependencies": {
         "electron-builder-squirrel-windows": "^22.14.12",
         "electron-squirrel-startup": "^1.0.0",
         "electron-updater": "^4.3.9",
+        "node-fetch": "2.6.6",
         "sqlite3": "^5.0.2"
     },
-
     "build": {
         "extraResources": [
             "databaseFolder"
@@ -138,12 +129,10 @@
             "publish": false,
             "target": "AppImage"
         },
-        
         "mac": {
             "icon": "src/icon.png",
             "category": "public.app-category.developer-tools"
         },
-
         "win": {
             "icon": "src/icon.png"
         }

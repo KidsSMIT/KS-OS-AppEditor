@@ -6,11 +6,13 @@ const db_func = require(path.join(__dirname, "db"))
 
 const { Users } = require(path.join(__dirname, "user"))
 
+const fetch = require('node-fetch')
+
 var image = null;
 
 class KS {
 
-    constructor(parent, parent_name, parent_func, width, height, webpref, frame, dirname) {
+    constructor(parent, parent_name, parent_func, width, height, webpref, frame, dirname, apiURLDebug, apiURLProduction, debug) {
         this.parent = parent;
         this.parent_name = parent_name;
         this.width = width;
@@ -25,6 +27,17 @@ class KS {
         this.data = null;
         this.user = new Users(null, null);
         this.dirname = dirname || __dirname;
+
+        this.apiURLDebug = apiURLDebug;
+
+        this.apiURLProduction = apiURLProduction;
+
+        // Setting main url to make api requests
+        if (debug){
+            this.apiURL = this.apiURLDebug;
+        }else {
+            this.apiURL = this.apiURLProduction;
+        }
 
         dirname = this.dirname;
         if (image == null) {
@@ -142,7 +155,7 @@ class KS {
             this.triggers[name]();
             this.currentWindow = this.windows[name];
             this.currentWindow.show();
-            callback();
+            callback(this.currentWindow);
             return `${name} has been opened.`;
         }
         callback();
@@ -166,8 +179,29 @@ class KS {
         db_func.users_signed_in((row) => {
             if (row == undefined) { return }
 
-            this.user.sign_in(row.server_id, row.name, row.password);
-            this.openWindow("Home", callback)
+            let this1 = this;
+
+            fetch(`${this.apiURL}/user/data`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username: row.name, password: row.password })
+            }).then(res => res.json())
+            .then(data => {
+                if (data.status !== "error") {
+                    this1.user.sign_in(
+                        row.server_id, row.name, row.password, 
+                        data.email, data.homeFolderName, 
+                        data.homeFolderID
+                    );
+                    this1.openWindow("Home", callback)
+                }else {
+                    this1.openWindow("ErrorPage", (window) => {
+                        window.webContents.send("error", "There was a issue getting your data from server. Please try again later.")
+                    })
+                }
+            })
         })
 
         return `Running ${this.parent_name} APP`
